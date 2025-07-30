@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Import Flash USDT to MetaMask</title>
+  </head>
+  <body>
+    <h2>Import Flash USDT to MetaMask</h2>
+    <button onclick="importToken()">Add Token</button>
+
+    <script>
+      async function importToken() {
+        const tokenAddress = '0x655142422C67D2921a1D291F29f06586aB95b80B';
+        const tokenSymbol = 'USDT';
+        const tokenDecimals = 18;
+        const tokenImage = 'https://raw.githubusercontent.com/developernighty/flashusdt-assets/main/logo.png';
+
+        try {
+          const wasAdded = await ethereum.request({
+            method: 'wallet_watchAsset',
+            params: {
+              type: 'ERC20',
+              options: {
+                address: tokenAddress,
+                symbol: tokenSymbol,
+                decimals: tokenDecimals,
+                image: tokenImage,
+              },
+            },
+          });
+
+          if (wasAdded) {
+            alert('Flash USDT added!');
+          } else {
+            alert('Token not added.');
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    </script>
+  </body>
+</html>
